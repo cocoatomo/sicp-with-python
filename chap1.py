@@ -1,6 +1,19 @@
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 
+print('Exercise 1.5')
+
+def p():
+    p()
+
+def test(x, y):
+    if x == 0:
+        return 0
+    else:
+        return y
+
+print(test(0, p))
+
 print("1.1.7 Example: Square Roots by Newton's Method")
 
 def average(x, y):
