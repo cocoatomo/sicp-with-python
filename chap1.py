@@ -101,3 +101,32 @@ print('''
 sqrt(0.0001) (obviously is 0.01)
 ----------------------------------''')
 print('actual: {0}'.format(sqrt(0.0001)))
+
+print('''
+Exercise 1.8''')
+
+def improve(guess, x):
+    return (x / guess**2 + 2 * guess) / 3
+
+def qube(x):
+    return x**3
+
+def good_enough(guess, x):
+    return abs(qube(guess) / x - 1) < 0.001
+
+def qbrt_iter(guess, x):
+    if good_enough(guess, x):
+        return guess
+    else:
+        return qbrt_iter(improve(guess, x), x)
+
+def qbrt(x):
+    return qbrt_iter(1.0, x)
+
+def _qbrt_test():
+    print(qbrt(27))
+    print(qbrt(1000))
+    print(qbrt(2))
+    print(qbrt(0.1))
+
+_qbrt_test()
