@@ -52,13 +52,13 @@ def sqrt(x):
     return sqrt_iter(1.0, x)
 
 
-def _test():
-    print(sqrt(9))
-    print(sqrt(100 + 37))
-    print(sqrt(sqrt(2) + sqrt(3)))
-    print(square(sqrt(1000)))
+def test_sqrt():
+    assert abs(sqrt(9) - 3.00009155413138) < 0.001
+    assert abs(sqrt(100 + 37) - 11.704699917758145) < 0.001
+    assert abs(sqrt(sqrt(2) + sqrt(3)) - 1.7739279023207892) < 0.001
+    assert abs(square(sqrt(1000)) - 1000.000369924366) < 0.001
 
-_test()
+test_sqrt()
 
 
 print('''
@@ -151,13 +151,13 @@ def qbrt(x):
     return qbrt_iter(1.0, x)
 
 
-def _qbrt_test():
-    print(qbrt(27))
-    print(qbrt(1000))
-    print(qbrt(2))
-    print(qbrt(0.1))
+def test_qbrt():
+    assert abs(qbrt(27) / 3 - 1) < 0.001
+    assert abs(qbrt(1000) / 10 - 1) < 0.001
+    assert abs(qbrt(2) / 1.2599210498948731647672106072782283506 - 1) < 0.001
+    assert abs(qbrt(0.1) / 0.4641588833612778892410076350919446576 - 1) < 0.001
 
-_qbrt_test()
+test_qbrt()
 
 
 print('''
@@ -186,11 +186,12 @@ def sqrt(x):
 
     return sqrt_iter(1.0, x)
 
-_test()
+test_sqrt()
 
 
 print('''
 lexical scoping''')
+
 
 def sqrt(x):
     def good_enough(guess):
@@ -207,7 +208,7 @@ def sqrt(x):
 
     return sqrt_iter(1.0)
 
-_test()
+test_sqrt()
 
 
 print('''
@@ -230,3 +231,85 @@ print(A(1, 10))
 print(A(2, 4))
 print(A(3, 3))
 
+
+print('''
+def f(n):
+    return A(0, n)
+
+def g(n):
+    return A(1, n)
+
+def h(n):
+    return A(2, n)''')
+
+
+def f(n):
+    return A(0, n)
+
+
+def g(n):
+    return A(1, n)
+
+
+def h(n):
+    return A(2, n)
+
+
+print('''
+f(n) = 2 * n
+g(n) = 2**n if n > 0 else 0
+h(n) = 2**2**...**2 (<- n 2's) if n > 0 else 0
+''')
+
+
+def test_f():
+    for n in xrange(10):
+        assert f(n) == 2 * n
+
+
+def test_g():
+    for n in xrange(10):
+        assert g(n) == (2**n if n > 0 else 0)
+
+
+def test_h():
+    def hh(n):
+        if n == 0:
+            return 0
+
+        result = 1
+        for i in xrange(n):
+            result = 2**result
+        return result
+
+    for n in xrange(5):
+        assert h(n) == hh(n)
+
+
+print('''
+1.2.2  Tree Recursion
+=====================''')
+
+
+def fib_iter(a, b, count):
+    if count == 0:
+        return b
+    else:
+        return fib_iter(a + b, a, count - 1)
+
+
+def fib(n):
+    return fib_iter(1, 0, n)
+
+
+def test_fib():
+    assert fib(0) == 0
+    assert fib(1) == 1
+    assert fib(2) == 1
+    assert fib(3) == 2
+    assert fib(4) == 3
+    assert fib(5) == 5
+    assert fib(6) == 8
+    assert fib(7) == 13
+    assert fib(8) == 21
+    assert fib(9) == 34
