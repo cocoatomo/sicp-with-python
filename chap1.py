@@ -313,3 +313,85 @@ def test_fib():
     assert fib(7) == 13
     assert fib(8) == 21
     assert fib(9) == 34
+
+
+print('''
+Example: Counting change
+========================''')
+
+
+def first_denomination(kinds_of_coins):
+    if kinds_of_coins == 1:
+        return 1
+    elif kinds_of_coins == 2:
+        return 5
+    elif kinds_of_coins == 3:
+        return 10
+    elif kinds_of_coins == 4:
+        return 25
+    elif kinds_of_coins == 5:
+        return 50
+
+
+def cc(amount, kinds_of_coins):
+    if amount == 0:
+        return 1
+    elif amount < 0 or kinds_of_coins == 0:
+        return 0
+    else:
+        return cc(amount, kinds_of_coins - 1) + \
+            cc(amount - first_denomination(kinds_of_coins), kinds_of_coins)
+
+
+def count_change(amount):
+    return cc(amount, 5)
+
+
+def test_cc():
+    assert count_change(100) == 292
+
+
+print('''
+Exercise 1.11
+=============''')
+
+
+def f(n):
+    """recursive version"""
+    if n < 3:
+        return n
+    else:
+        return f(n - 1) + 2 * f(n - 2) + 3 * f(n - 3)
+
+
+def test_f():
+    assert f(0) == 0
+    assert f(1) == 1
+    assert f(2) == 2
+    assert f(3) == 4
+    assert f(4) == 11
+    assert f(5) == 25
+    assert f(6) == 59
+    assert f(7) == 142
+    assert f(8) == 335
+    assert f(9) == 796
+
+
+def f(n):
+    """iterative version"""
+    return f_iter(2, 1, 0, n)
+
+
+def f_iter(a, b, c, count):
+    if count == 0:
+        return c
+    elif count == 1:
+        return b
+    elif count == 2:
+        return a
+    else:
+        return f_iter(a + 2 * b + 3 * c, a, b, count - 1)
+
+
+def test_f2():
+    test_f()
