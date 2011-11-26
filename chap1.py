@@ -453,7 +453,7 @@ def fast_expt(b, n):
     if n == 0:
         return 1
     elif even(n):
-        return square(fast_expt(b, n / 2))
+        return square(fast_expt(b, n // 2))
     else:
         return b * fast_expt(b, n - 1)
 
@@ -468,9 +468,9 @@ def expt_iter(b, exponent, product):
     if exponent == 0:
         return product
     elif even(exponent):
-        return expt_iter(square(b), exponent / 2, product)
+        return expt_iter(square(b), exponent // 2, product)
     else:
-        return expt_iter(square(b), (exponent - 1) / 2, b * product)
+        return expt_iter(square(b), (exponent - 1) // 2, b * product)
 
 
 def test_expt2():
