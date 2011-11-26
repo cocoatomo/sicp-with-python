@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
 
 print('''
@@ -395,3 +395,83 @@ def f_iter(a, b, c, count):
 
 def test_f2():
     test_f()
+
+
+print('''
+Exercise 1.12
+=============''')
+
+
+def pascal_triangle(m, n):
+    if n == 0:
+        return 1
+    elif n == m:
+        return 1
+    else:
+        return pascal_triangle(m - 1, n) + pascal_triangle(m - 1, n - 1)
+
+
+for m in range(5):
+    print(' '.join(str(pascal_triangle(m, n)) for n in range(m + 1)))
+
+
+print('''
+Exercise 1.13
+=============''')
+
+
+print('proof: obvious.')
+
+
+print('''
+1.2.4  Exponentiation
+=====================''')
+
+
+def expt_iter(b, counter, product):
+    if counter == 0:
+        return product
+    else:
+        return expt_iter(b, counter - 1, b * product)
+
+
+def expt(b, n):
+    return expt_iter(b, n, 1)
+
+
+def test_expt():
+    for b in range(10):
+        for n in range(10):
+            assert expt(b, n) == b**n
+
+
+def even(n):
+    return (n % 2) == 0
+
+
+def fast_expt(b, n):
+    if n == 0:
+        return 1
+    elif even(n):
+        return square(fast_expt(b, n / 2))
+    else:
+        return b * fast_expt(b, n - 1)
+
+
+def test_fast_expt():
+    for b in range(10):
+        for n in range(10):
+            assert fast_expt(b, n) == b**n
+
+
+def expt_iter(b, exponent, product):
+    if exponent == 0:
+        return product
+    elif even(exponent):
+        return expt_iter(square(b), exponent / 2, product)
+    else:
+        return expt_iter(square(b), (exponent - 1) / 2, b * product)
+
+
+def test_expt2():
+    test_expt()
