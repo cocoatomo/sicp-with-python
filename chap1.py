@@ -723,5 +723,38 @@ def test_fast_prime(times):
     assert not fast_prime(9, times)
     assert not fast_prime(10, times)
     assert fast_prime(11, times)
+    assert fast_prime(691, times)
+    assert fast_prime(257, times)
 
 test_fast_prime(10)
+
+
+print('the smallest divisor for {0} is {1}'.format(199, smallest_divisor(199)))
+print('the smallest divisor for {0} is {1}'.format(1999, smallest_divisor(1999)))
+print('the smallest divisor for {0} is {1}'.format(19999, smallest_divisor(19999)))
+
+print('''
+Exercise 1.22
+=============''')
+
+import time
+
+def report_prime(elapsed_time):
+    print(' *** ')
+    print(elapsed_time)
+
+def start_prime_test(n, start_time):
+    if prime(n):
+        report_prime(time.time() - start_time)
+
+def timed_prime_test(n):
+    print()
+    print(n)
+    return start_prime_test(n, time.time())
+
+timed_prime_test(2)
+timed_prime_test(3)
+timed_prime_test(5)
+timed_prime_test(7)
+timed_prime_test(11)
+timed_prime_test(13)
