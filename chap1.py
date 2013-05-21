@@ -728,7 +728,6 @@ def test_fast_prime(times):
 
 test_fast_prime(10)
 
-
 print('the smallest divisor for {0} is {1}'.format(199, smallest_divisor(199)))
 print('the smallest divisor for {0} is {1}'.format(1999, smallest_divisor(1999)))
 print('the smallest divisor for {0} is {1}'.format(19999, smallest_divisor(19999)))
@@ -758,3 +757,11 @@ timed_prime_test(5)
 timed_prime_test(7)
 timed_prime_test(11)
 timed_prime_test(13)
+
+
+
+
+
+print('''
+Exercise 1.23
+=============''')
